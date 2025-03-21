@@ -1,0 +1,135 @@
+---
+import { marked } from "marked";
+import { getHighlighter } from "shiki";
+import { formatMd } from "../lib/utils";
+
+interface Props {
+  markdown: string;
+}
+
+const { markdown } = Astro.props;
+
+const highlighter = await getHighlighter({
+  theme: "github-dark-dimmed",
+});
+
+marked.setOptions({
+  highlight: (code, lang) => highlighter.codeToHtml(code, { lang }),
+});
+
+const html = formatMd(marked.parse(markdown));
+---
+
+<div class="content">
+  <Fragment set:html={html} />
+</div>
+
+<style lang="scss" is:global>
+  .content {
+    hr {
+      border: none;
+    }
+
+    :is(h1, h2, h3, hr) {
+      margin: 16px 0;
+      border-bottom: 2px solid;
+    }
+
+    :is(p, blockquote, pre, ol, ul, table, img) {
+      margin: 8px 0;
+    }
+
+    blockquote {
+      border-left: 2px solid;
+      padding-left: 8px;
+      border-radius: 2px;
+    }
+
+    pre {
+      border-radius: 4px;
+    }
+
+    pre > code {
+      display: block;
+
+      padding: 8px;
+      border-radius: 4px;
+
+      counter-reset: code-line;
+      counter-increment: code-line 0;
+
+      overflow-x: auto;
+    }
+
+    code .line::before {
+      content: counter(code-line);
+      counter-increment: code-line;
+      width: 1.5rem;
+      margin-right: 1rem;
+      display: inline-block;
+      text-align: right;
+      color: #636e7b;
+    }
+
+    :is(ul, ol) {
+      margin-left: 2ch;
+    }
+
+    li > :is(ul, ol) {
+      margin: 0 0 0 2ch;
+    }
+
+    table {
+      border-collapse: collapse;
+
+      td,
+      th {
+        padding: 8px;
+        border: 1px solid;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    del {
+      opacity: 0.5;
+      text-decoration: line-through #ff4136 double;
+    }
+
+    a {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-word;
+      hyphens: none;
+    }
+
+    .shiki {
+      position: relative;
+
+      > .copy-btn {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+
+        opacity: 0.2;
+        transition: opacity 0.1s;
+
+        width: 27px;
+        height: 27px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        cursor: pointer;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+</style>

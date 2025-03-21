@@ -42,14 +42,14 @@ You can customize the colors of the theme by editing the `src/styles/global.css`
 This file uses Tailwind CSS and CSS variables to customize the colors of the theme.
 Zaggonaut uses the following CSS variables:
 
-- `--color-zag-dark`: The dark color of the theme
-- `--color-zag-light`: The light color of the theme
-- `--color-zag-dark-muted`: The dark color of the theme with a slight opacity
-- `--color-zag-light-muted`: The light color of the theme with a slight opacity
-- `--color-zag-accent-light`: The light accent color of the theme
-- `--color-zag-accent-light-muted`: The light accent color of the theme with a slight opacity
-- `--color-zag-accent-dark`: The dark accent color of the theme
-- `--color-zag-accent-dark-muted`: The dark accent color of the theme with a slight opacity
+- `--color-maxexq-dark`: The dark color of the theme
+- `--color-maxexq-light`: The light color of the theme
+- `--color-maxexq-dark-muted`: The dark color of the theme with a slight opacity
+- `--color-maxexq-light-muted`: The light color of the theme with a slight opacity
+- `--color-maxexq-accent-light`: The light accent color of the theme
+- `--color-maxexq-accent-light-muted`: The light accent color of the theme with a slight opacity
+- `--color-maxexq-accent-dark`: The dark accent color of the theme
+- `--color-maxexq-accent-dark-muted`: The dark accent color of the theme with a slight opacity
 
 ### Text
 
@@ -73,7 +73,7 @@ export const GLOBAL = {
     home: "/",
     projects: "/projects",
     blog: "/blog",
-  }
+  },
 };
 ```
 
