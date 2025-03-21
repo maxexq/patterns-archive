@@ -11,8 +11,8 @@
   src: url(https://cdn.jsdelivr.net/fontsource/fonts/literata:vf@latest/latin-opsz-normal.woff2)
     format("woff2-variations");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
-    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
@@ -25,102 +25,117 @@
     url(https://cdn.jsdelivr.net/fontsource/fonts/press-start-2p@latest/latin-400-normal.woff)
       format("woff");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
-    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @theme {
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   --font-display: "press-start-2p", ui-monospace, monospace;
-  --font-serif: "Literata Variable", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --color-zag-dark: var(--color-neutral-900);
-  --color-zag-light: var(--color-neutral-100);
-  --color-zag-dark-muted: var(--color-neutral-600);
-  --color-zag-light-muted: var(--color-neutral-400);
-  --color-zag-accent-light: var(--color-emerald-400);
-  --color-zag-accent-light-muted: var(--color-emerald-300);
-  --color-zag-accent-dark: var(--color-emerald-600);
-  --color-zag-accent-dark-muted: var(--color-emerald-800);
+  --font-serif: "Literata Variable", ui-serif, Georgia, Cambria,
+    "Times New Roman", Times, serif;
+  --color-maxexq-dark: var(--color-neutral-900);
+  --color-maxexq-light: var(--color-neutral-100);
+  --color-maxexq-dark-muted: var(--color-neutral-600);
+  --color-maxexq-light-muted: var(--color-neutral-400);
+  --color-maxexq-accent-light: var(--color-emerald-400);
+  --color-maxexq-accent-light-muted: var(--color-emerald-300);
+  --color-maxexq-accent-dark: var(--color-emerald-600);
+  --color-maxexq-accent-dark-muted: var(--color-emerald-800);
+  --color-code-dark: var(--color-neutral-900);
+  --color-code-light: var(--color-neutral-100);
 }
 
 @layer base {
   :root {
-    --zag-stroke: 2px;
-    --zag-offset: 6px;
-    --zag-transition-duration: 0.15s;
-    --zag-transition-timing-function: ease-in-out;
+    --maxexq-stroke: 2px;
+    --maxexq-offset: 6px;
+    --maxexq-transition-duration: 0.15s;
+    --maxexq-transition-timing-function: ease-in-out;
   }
 
-  .zag-transition {
+  .maxexq-transition {
     @media (prefers-reduced-motion: no-preference) {
-      transition:
-        background-color var(--zag-transition-duration) var(--zag-transition-timing-function),
-        color var(--zag-transition-duration) var(--zag-transition-timing-function),
-        fill var(--zag-transition-duration) var(--zag-transition-timing-function),
-        border-color var(--zag-transition-duration) var(--zag-transition-timing-function),
-        transform var(--zag-transition-duration) var(--zag-transition-timing-function);
+      transition: background-color var(--maxexq-transition-duration)
+          var(--maxexq-transition-timing-function),
+        color var(--maxexq-transition-duration)
+          var(--maxexq-transition-timing-function),
+        fill var(--maxexq-transition-duration)
+          var(--maxexq-transition-timing-function),
+        border-color var(--maxexq-transition-duration)
+          var(--maxexq-transition-timing-function),
+        transform var(--maxexq-transition-duration)
+          var(--maxexq-transition-timing-function);
     }
   }
 
-  .zag-bg {
-    background-color: var(--color-zag-light);
+  .maxexq-bg {
+    background-color: var(--color-maxexq-light);
     :where(.dark, .dark *) & {
-      background-color: var(--color-zag-dark);
+      background-color: var(--color-maxexq-dark);
     }
   }
 
-  .-zag-bg {
-    background-color: var(--color-zag-dark);
+  .-maxexq-bg {
+    background-color: var(--color-maxexq-dark);
     :where(.dark, .dark *) & {
-      background-color: var(--color-zag-light);
-    }
-  }
-  
-  .zag-text {
-    color: var(--color-zag-dark);
-    :where(.dark, .dark *) & {
-      color: var(--color-zag-light);
+      background-color: var(--color-maxexq-light);
     }
   }
 
-  .-zag-text {
-    color: var(--color-zag-light);
+  .maxexq-text {
+    color: var(--color-maxexq-dark);
     :where(.dark, .dark *) & {
-      color: var(--color-zag-dark);
+      color: var(--color-maxexq-light);
     }
   }
 
-  .zag-muted {
-    color: var(--color-zag-dark-muted);
+  .-maxexq-text {
+    color: var(--color-maxexq-light);
     :where(.dark, .dark *) & {
-      color: var(--color-zag-light-muted);
+      color: var(--color-maxexq-dark);
     }
   }
 
-  .zag-fill {
-    fill: var(--color-zag-dark);
+  .maxexq-muted {
+    color: var(--color-maxexq-dark-muted);
+    :where(.dark, .dark *) & {
+      color: var(--color-maxexq-light-muted);
+    }
+  }
+
+  .maxexq-fill {
+    fill: var(--color-maxexq-dark);
     &:where(.dark, .dark *) {
-      fill: var(--color-zag-light);
+      fill: var(--color-maxexq-light);
     }
   }
 
-  .zag-text-muted {
-    color: var(--color-zag-dark-muted);
+  .maxexq-text-muted {
+    color: var(--color-maxexq-dark-muted);
     &:where(.dark, .dark *) {
-      color: var(--color-zag-light-muted);
+      color: var(--color-maxexq-light-muted);
     }
   }
 
-  .zag-border-b {
-    border-bottom: var(--zag-stroke) solid;
-    border-color: var(--color-zag-dark);
+  .maxexq-border {
+    border: var(--maxexq-stroke) solid;
+    border-color: var(--color-maxexq-dark);
     &:where(.dark, .dark *) {
-      border-color: var(--color-zag-light);
+      border-color: var(--color-maxexq-light);
     }
   }
 
-  .zag-offset {
-    text-underline-offset: var(--zag-offset);
+  .maxexq-border-b {
+    border-bottom: var(--maxexq-stroke) solid;
+    border-color: var(--color-maxexq-dark);
+    &:where(.dark, .dark *) {
+      border-color: var(--color-maxexq-light);
+    }
+  }
+
+  .maxexq-offset {
+    text-underline-offset: var(--maxexq-offset);
   }
 
   .opsz {

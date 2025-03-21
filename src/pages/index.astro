@@ -1,11 +1,31 @@
 ---
-import { featuredArticles, featuredProjects } from "../lib/featured";
 import { GLOBAL } from "../lib/variables";
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/home/Hero.astro";
 import Section from "../components/common/Section.astro";
-import FeaturedProjects from "../components/home/FeaturedProjects.astro";
-import FeaturedArticles from "../components/home/FeaturedArticles.astro";
+import PatternArticles from "../components/home/PatternArticles.astro";
+
+import { Octokit } from "@octokit/core";
+import type { ArticleFrontmatter } from "../lib/types";
+import { renderArticleTags } from "../lib/utils";
+
+const octokit = new Octokit({
+  auth: import.meta.env.TOKEN,
+});
+
+const { data: issues } = await octokit.request("GET /repos/{owner}/{repo}/issues", {
+  owner: GLOBAL.username,
+  repo: GLOBAL.repo,
+  labels: GLOBAL.issuesLabel?.join(","),
+});
+
+const patternArticles = issues?.map((issue) => ({
+  title: issue.title,
+  markdownBody: issue.body,
+  tags: renderArticleTags(issue.labels),
+  url: issue.html_url,
+  timestamp: issue.created_at,
+})) as ArticleFrontmatter[];
 ---
 
 <Layout>
@@ -43,9 +63,6 @@ import FeaturedArticles from "../components/home/FeaturedArticles.astro";
     <Hero />
   </Section>
   <Section>
-    <FeaturedProjects featuredProjects={featuredProjects} />
-  </Section>
-  <Section>
-    <FeaturedArticles featuredArticles={featuredArticles} />
+    <PatternArticles articleList={patternArticles} />
   </Section>
 </Layout>

@@ -1,13 +1,13 @@
-export type ProjectFrontmatter = {
+export type ArticleFrontmatter = {
   /**
    * The title of the project
    */
   title: string;
 
   /**
-   * The description of the project
+   * The markdown content of the project
    */
-  description: string;
+  markdownBody: string;
 
   /**
    * The tags of the project
@@ -16,68 +16,57 @@ export type ProjectFrontmatter = {
   tags?: string[];
 
   /**
-   * The GitHub URL of the project
+   * The GitHub issue URL of the project
    */
-  githubUrl?: string;
-
-  /**
-   * The live URL of the project
-   */
-  liveUrl?: string;
-
-  /**
-   * Whether the project should be featured on the homepage
-   */
-  featured?: boolean;
+  url: string;
 
   /**
    * The date the project was created or started in W3C format
    * (this will determine the sort order of the projects)
    */
   timestamp: string;
-
-  /**
-   * The URL of the project on the website
-   * (eg. https://zaggonaut.dev/projects/my-project)
-   */
-  filename: string;
 };
 
-export type ArticleFrontmatter = {
+export type IssuesTag = {
   /**
-   * The title of the article
+   * The id of the tag
+   * (eg. 1)
    */
-  title: string;
+  id?: number;
 
   /**
-   * THe summary description of the article
+   * The node_id of the tag
+   * (eg. "MDU6TGFiZWwx")
    */
-  description: string;
+  node_id?: string;
 
   /**
-   * The tags of the article
-   * (eg. ["JavaScript", "React", "Node.js"])
+   * The url of the tag
+   * (eg. "https://api.github.com/repos/maxexq/patterns-archive/labels/bug")
    */
-  tags?: string[];
+  url?: string;
 
   /**
-   * The estimated time to read the article in minutes
+   * The name of the tag
+   * (eg. "bug")
    */
-  time: number;
+  name?: string;
 
   /**
-   * Whether the article should be featured on the homepage
+   * The color of the tag
+   * (eg. "d73a4a")
    */
-  featured: boolean;
+  description?: string | null;
 
   /**
-   * The timestamp the article was published in W3C format
+   * The default of the tag
+   * (eg. false)
    */
-  timestamp: string;
+  color?: string | null;
 
   /**
-   * The URL of the article on the website
-   * (eg. https://zaggonaut.dev/blog/my-article)
+   * The default of the tag
+   * (eg. false)
    */
-  filename: string;
+  default?: boolean;
 };

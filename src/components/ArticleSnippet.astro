@@ -1,29 +1,71 @@
 ---
-import { processArticleDate } from "../lib/utils";
+import { formatArticleTitle, processArticleDate } from "../lib/utils";
 import Anchor from "./common/Anchor.astro";
+import Content from "./Content.astro";
 
 export type Props = {
   title: string;
-  description: string;
+  markdownBody: string ;
   url: string;
-  duration?: string;
-  timestamp?: string;
+  tags: string[];
+  timestamp: string
 };
 
-const { title, description, url, duration, timestamp } = Astro.props;
+const { title, markdownBody, url, tags, timestamp  } = Astro.props;
+
+const formatTitle = formatArticleTitle(title);
 ---
 
-<div class="zag-text zag-transition flex flex-col gap-3 pb-8">
-  <Anchor url={url} class="text-xl">
-    {title}
-  </Anchor>
-  <p class="">
-    {description}
+<div class="flex flex-col gap-3 p-8 border-b maxexq-border">
+  <div class="flex flex-col gap-3 sm:flex-row sm:justify-between">
+     <div class="flex flex-col gap-2">
+        <h1 class={`${formatTitle?.includes('<code>') ? 'code-title' : 'text-xl font-medium'} maxexq-transition`} title={title} set:html={formatTitle}></h1>
+        <div class="flex flex-row wrap gap-2">
+          {
+            tags.map((tag) => (
+              <span class="-maxexq-text -maxexq-bg maxexq-transition px-2 py-1 text-sm font-semibold">
+                {tag}
+              </span>
+            ))
+          }
+        </div>
+     </div>
+    {
+      url ? (
+        <Anchor url={url} class="text-base" external>
+          GitHub
+        </Anchor>
+      ) : null
+    }
+  </div>
+  <p class="maxexq-text maxexq-transition">
+    <Content markdown={markdownBody} />
   </p>
   <div
-    class="zag-muted zag-transition flex justify-between items-center"
+    class="maxexq-muted maxexq-transition flex justify-between items-center"
   >
     {timestamp ? <p>{processArticleDate(timestamp)}</p> : null}
-    {duration ? <p>{duration}</p> : null}
   </div>
 </div>
+
+<style is:inline>
+  .code-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    background-color: #22272d;
+    color: #333;
+    padding: 4px;
+    border-radius: 8px;
+
+    color: var(--color-maxexq-light);
+    :where(.dark, .dark *) & {
+      color: var(--color-maxexq-dark);
+    }
+
+    background-color: var(--color-code-dark);
+    :where(.dark, .dark *) & {
+      background-color: var(--color-code-light);
+    }
+  }
+
+</style>
